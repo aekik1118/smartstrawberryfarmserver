@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class EnvironmentInfoControllerTest {
 
-    
+
     @Autowired
     MockMvc mockMvc;
 
@@ -34,7 +34,7 @@ public class EnvironmentInfoControllerTest {
         EnvironmentInfoDto environmentInfoDto = EnvironmentInfoDto.builder()
                 .farmname("gyFarm")
                 .brightness(44.2)
-                .humidity(32.4)
+                .humidity(100)
                 .temperature(64.2)
                 .build();
 
@@ -56,7 +56,7 @@ public class EnvironmentInfoControllerTest {
                 .id(10L)
                 .farmname("gyFarm")
                 .brightness(44.2)
-                .humidity(50)
+                .humidity(52)
                 .temperature(64.2)
                 .build();
 
@@ -90,6 +90,20 @@ public class EnvironmentInfoControllerTest {
                 .farmname("gyFarm")
                 .brightness(44.2)
                 .humidity(-50)
+                .temperature(64.2)
+                .build();
+
+        mockMvc.perform(post("/api/environmentinfo")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .accept(MediaTypes.HAL_JSON)
+                .content(objectMapper.writeValueAsString(environmentInfoDto)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+
+        environmentInfoDto = EnvironmentInfoDto.builder()
+                .farmname("gyFarm")
+                .brightness(44.2)
+                .humidity(101)
                 .temperature(64.2)
                 .build();
 

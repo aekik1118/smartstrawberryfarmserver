@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Data
 @Builder
@@ -15,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class EnvironmentInfoDto {
     @NotEmpty
     private String farmname;
-    @NotNull
+    @Min(0) @Max(100)
     private double humidity;
     @NotNull
     private double temperature;
