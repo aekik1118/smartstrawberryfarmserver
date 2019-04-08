@@ -14,6 +14,10 @@ CREATE TABLE ENVIRONMENTINFO (
 );
 
 INSERT INTO ENVIRONMENTINFO (farmname, humidity, temperature, brightness) VALUES ('testfarm', 11,12,13);
+-- INSERT INTO ENVIRONMENTINFO (farmname, humidity, temperature, brightness) VALUES ('testfarm2', 112,122,123);
+
+
+
 
 
 

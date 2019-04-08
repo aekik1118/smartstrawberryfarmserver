@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Getter @Setter @ToString
 @AllArgsConstructor @NoArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id")
 public class EnvironmentInfo {
     private Long id;
     private String farmname;

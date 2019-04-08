@@ -43,13 +43,12 @@ public class EnvironmentInfoControllerTest {
                 .build();
 
         mockMvc.perform(post("/api/environmentinfo")
-                    .content(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                     .accept(MediaTypes.HAL_JSON)
                     .content(objectMapper.writeValueAsString(environmentInfo)))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").exists());
-
     }
 
 
