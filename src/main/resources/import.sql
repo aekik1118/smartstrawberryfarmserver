@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS ENVIRONMENTINFO;
 DROP SEQUENCE IF EXISTS seq_environment_info;
 
+
 CREATE SEQUENCE seq_environment_info START 1;
 
-CREATE TABLE ENVIRONMENTINFO (
+CREATE TABLE IF NOT EXISTS ENVIRONMENTINFO (
   id integer not null DEFAULT nextval('seq_environment_info'),
   farmname varchar(20) not null ,
   humidity float(8) not null ,
