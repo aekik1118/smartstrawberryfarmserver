@@ -33,6 +33,7 @@ public class EnvironmentInfoControllerTest {
 
         EnvironmentInfoDto environmentInfoDto = EnvironmentInfoDto.builder()
                 .farmname("gyFarm")
+                .area("gyArea")
                 .brightness(44.2)
                 .humidity(100)
                 .temperature(64.2)
@@ -55,6 +56,7 @@ public class EnvironmentInfoControllerTest {
         EnvironmentInfo environmentInfo = EnvironmentInfo.builder()
                 .id(10L)
                 .farmname("gyFarm")
+                .area("gyArea")
                 .brightness(44.2)
                 .humidity(52)
                 .temperature(64.2)
@@ -88,6 +90,7 @@ public class EnvironmentInfoControllerTest {
 
         EnvironmentInfoDto environmentInfoDto = EnvironmentInfoDto.builder()
                 .farmname("gyFarm")
+                .area("gyArea")
                 .brightness(44.2)
                 .humidity(-50)
                 .temperature(64.2)

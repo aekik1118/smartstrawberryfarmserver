@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class EnvironmentInfo {
     private Long id;
     private String farmname;
+    private String area;
     private double humidity;
     private double temperature;
     private double brightness;

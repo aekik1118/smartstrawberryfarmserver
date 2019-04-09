@@ -14,6 +14,8 @@ import javax.validation.constraints.*;
 public class EnvironmentInfoDto {
     @NotEmpty
     private String farmname;
+    @NotEmpty
+    private String area;
     @Min(0) @Max(100)
     private double humidity;
     @NotNull

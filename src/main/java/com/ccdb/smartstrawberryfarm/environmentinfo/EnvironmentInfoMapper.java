@@ -12,7 +12,7 @@ public interface EnvironmentInfoMapper {
     @Select("SELECT * FROM ENVIRONMENTINFO")
     EnvironmentInfo selectall();
 
-    @Insert("INSERT INTO ENVIRONMENTINFO (id, farmname, humidity, temperature, brightness) VALUES (#{id}, #{farmname}, #{humidity}, #{temperature}, #{brightness})")
+    @Insert("INSERT INTO ENVIRONMENTINFO (id, area, farmname, humidity, temperature, brightness) VALUES (#{id}, #{area}, #{farmname}, #{humidity}, #{temperature}, #{brightness})")
     @SelectKey(statement = "SELECT nextval('seq_environment_info')", before = true ,keyProperty = "id", resultType = Long.class)
     Long createEnvironmentInfo(EnvironmentInfo environmentInfo);
 
