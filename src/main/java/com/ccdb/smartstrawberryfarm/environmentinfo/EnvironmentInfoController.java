@@ -7,10 +7,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -61,12 +58,14 @@ public class EnvironmentInfoController {
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity getEnvironmentInfo(String farmName, String area, String beginTime, String endTime){
         List<EnvironmentInfo> environmentInfoList = environmentInfoMapper.selectallbyTime(farmName, area, beginTime, endTime);
         return ResponseEntity.ok(environmentInfoList);
     }
 
     @GetMapping("/recent")
+    @CrossOrigin
     public ResponseEntity getRecentEnvInfo(String farmName, String area){
         EnvironmentInfo environmentInfo = environmentInfoMapper.selectRecent(farmName, area);
         return ResponseEntity.ok(environmentInfo);
