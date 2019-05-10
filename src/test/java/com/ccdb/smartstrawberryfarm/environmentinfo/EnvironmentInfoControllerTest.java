@@ -195,8 +195,18 @@ public class EnvironmentInfoControllerTest {
                 .accept(MediaTypes.HAL_JSON)
                 .param("farmName","gyFarm")
                 .param("area","gyArea")
-        ).andDo(print());
-
+        )
+                .andDo(print())
+                .andDo(document("get-env-recent",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.ACCEPT).description("accept header"),
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("contnet type header")
+                        ),
+                        requestParameters(
+                                parameterWithName("farmName").description("농장의 이름"),
+                                parameterWithName("area").description("farm 농장의 구역의 이름")
+                        )
+                ));
     }
 
 
