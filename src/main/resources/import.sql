@@ -17,10 +17,6 @@ CREATE TABLE IF NOT EXISTS ENVIRONMENTINFO (
 );
 
 
-INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness) VALUES ('gyFarm', 'gyArea', 11,12,13);
-INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness) VALUES ('gyFarm', 'gyArea', 11,21,31);
-INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 11,21,31,to_timestamp('2018-05-05','YYYY-MM-DD'));
-INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 11,21,31,to_timestamp('2018-05-05','YYYY-MM-DD'));
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness) VALUES ('cyFarm', 'cyArea', 12,22,32);
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness) VALUES ('cyFarm', 'gyArea', 13,23,33);
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 11,21,31,to_timestamp('2019-05-01 09:30:20','YYYY-MM-DD HH:MI:SS'));
@@ -36,7 +32,6 @@ INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,d
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 22,21,21,to_timestamp('2019-05-11 09:30:20','YYYY-MM-DD HH:MI:SS'));
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 23,41,51,to_timestamp('2019-05-12 09:30:20','YYYY-MM-DD HH:MI:SS'));
 INSERT INTO ENVIRONMENTINFO (farmname, area, humidity, temperature, brightness,date_prod) VALUES ('gyFarm', 'gyArea', 24,51,31,to_timestamp('2019-05-13 09:30:20','YYYY-MM-DD HH:MI:SS'));
--- INSERT INTO ENVIRONMENTINFO (farmname, humidity, temperature, brightness) VALUES ('testfarm2', 112,122,123);
 
 
 CREATE TABLE IF NOT EXISTS pollution (
