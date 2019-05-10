@@ -1,16 +1,27 @@
 package com.ccdb.smartstrawberryfarm.environmentinfo;
 
+import com.ccdb.smartstrawberryfarm.common.RestDocsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -19,6 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
+@Import(RestDocsConfiguration.class)
 public class EnvironmentInfoControllerTest {
 
 
@@ -36,8 +49,10 @@ public class EnvironmentInfoControllerTest {
                 .area("gyArea")
                 .brightness(44.2)
                 .humidity(100)
-                .temperature(64.2)
+                .temperature(64.3)
                 .build();
+
+        System.out.println(objectMapper.writeValueAsString(environmentInfoDto));
 
         mockMvc.perform(post("/api/environmentinfo")
                     .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -45,7 +60,26 @@ public class EnvironmentInfoControllerTest {
                     .content(objectMapper.writeValueAsString(environmentInfoDto)))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("id").exists());
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.query-events").exists())
+                .andDo(document("create-environment-info",
+                                links(
+                                        linkWithRel("self").description("link to self"),
+                                        linkWithRel("query-events").description("link to query-events")
+                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.ACCEPT).description("accept header"),
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("contnet type header")
+                                ),
+                                requestFields(
+                                        fieldWithPath("farmname").description("농장의 이름"),
+                                        fieldWithPath("area").description("farm 농장의 구역의 이름"),
+                                        fieldWithPath("humidity").description("해당 구역의 습도 정보"),
+                                        fieldWithPath("temperature").description("해당 구역의 온도 정보"),
+                                        fieldWithPath("brightness").description("해당 구역의 밝기 정보")
+                                )
+                        ));
     }
 
 

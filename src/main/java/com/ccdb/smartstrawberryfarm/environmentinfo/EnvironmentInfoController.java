@@ -3,6 +3,7 @@ package com.ccdb.smartstrawberryfarm.environmentinfo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -46,9 +47,12 @@ public class EnvironmentInfoController {
         Long rowsCnt = environmentInfoMapper.createEnvironmentInfo(environmentInfo);
         Long id = environmentInfo.getId();
 
-        URI createdUri = linkTo(EnvironmentInfoController.class).slash(id).toUri();
-        return ResponseEntity.created(createdUri).body(environmentInfo);
+        ControllerLinkBuilder selfLinkBuilder = linkTo(EnvironmentInfoController.class).slash(id);
+        URI createdUri = selfLinkBuilder.toUri();
+
+        EnvironmentInfoResource environmentInfoResource = new EnvironmentInfoResource(environmentInfo);
+        environmentInfoResource.add(linkTo(EnvironmentInfoController.class).withRel("query-events"));
+
+        return ResponseEntity.created(createdUri).body(environmentInfoResource);
     }
-
-
 }
