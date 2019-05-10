@@ -188,6 +188,17 @@ public class EnvironmentInfoControllerTest {
 
     }
 
+    @Test
+    public void getRecentEnvInfo() throws Exception {
+        mockMvc.perform(get("/api/environmentinfo/recent")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .accept(MediaTypes.HAL_JSON)
+                .param("farmName","gyFarm")
+                .param("area","gyArea")
+        ).andDo(print());
+
+    }
+
 
 
 }

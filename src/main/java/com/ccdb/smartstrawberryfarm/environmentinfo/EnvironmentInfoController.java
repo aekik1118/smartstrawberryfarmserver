@@ -66,5 +66,11 @@ public class EnvironmentInfoController {
         return ResponseEntity.ok(environmentInfoList);
     }
 
+    @GetMapping("/recent")
+    public ResponseEntity getRecentEnvInfo(String farmName, String area){
+        EnvironmentInfo environmentInfo = environmentInfoMapper.selectRecent(farmName, area);
+        return ResponseEntity.ok(environmentInfo);
+    }
+
 
 }
