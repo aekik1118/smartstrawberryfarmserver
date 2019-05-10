@@ -25,6 +25,8 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -162,12 +164,26 @@ public class EnvironmentInfoControllerTest {
         LocalDate exDate = currentDate.minusWeeks(1);
 
         mockMvc.perform(get("/api/environmentinfo")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .accept(MediaTypes.HAL_JSON)
             .param("farmName","gyFarm")
-            .param("farmArea","gyArea")
+            .param("area","gyArea")
             .param("beginTime",exDate.toString())
             .param("endTime",currentDate.toString())
         )
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("get-events-list",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.ACCEPT).description("accept header"),
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("contnet type header")
+                        ),
+                        requestParameters(
+                                parameterWithName("farmName").description("농장의 이름"),
+                                parameterWithName("area").description("farm 농장의 구역의 이름"),
+                                parameterWithName("beginTime").description("조회하려는 기간의 시작 날짜 : YYYY-MM-DD 형식으로 보내야 한다"),
+                                parameterWithName("endTime").description("조회하려는 기간의 마지막 날짜 + 1 : YYYY-MM-DD 형식으로 보내야 한다")
+                        )
+                ));
 
 
     }

@@ -61,8 +61,8 @@ public class EnvironmentInfoController {
     }
 
     @GetMapping
-    public ResponseEntity getEnvironmentInfo(String farmName, String farmArea, String beginTime, String endTime){
-        List<EnvironmentInfo> environmentInfoList = environmentInfoMapper.selectallbyTime(farmName, farmArea, beginTime, endTime);
+    public ResponseEntity getEnvironmentInfo(String farmName, String area, String beginTime, String endTime){
+        List<EnvironmentInfo> environmentInfoList = environmentInfoMapper.selectallbyTime(farmName, area, beginTime, endTime);
         return ResponseEntity.ok(environmentInfoList);
     }
 
